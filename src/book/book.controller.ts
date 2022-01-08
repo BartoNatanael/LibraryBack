@@ -1,7 +1,16 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { BookService } from './book.service';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
+import { CreateBookElementDto } from './dto/create-book-element.dto';
 
 @Controller('book')
 export class BookController {
@@ -10,6 +19,11 @@ export class BookController {
   @Post()
   create(@Body() createBookDto: CreateBookDto) {
     return this.bookService.create(createBookDto);
+  }
+
+  @Post('/bookElement')
+  createBookElement(@Body() createBookElementDto: CreateBookElementDto) {
+    return this.bookService.createBookElement(createBookElementDto);
   }
 
   @Get()

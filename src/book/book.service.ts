@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
 import { Book } from './entities/book.entity';
+import { CreateBookElementDto } from './dto/create-book-element.dto';
+import { BookElement } from './entities/bookElement.entity';
 
 @Injectable()
 export class BookService {
@@ -13,6 +15,20 @@ export class BookService {
     item.authorLastName = authorLastName;
     item.authorName = authorName;
     item.lang = lang;
+
+    item.save();
+
+    return {
+      isSuccess: true,
+      id: item.id,
+    };
+  }
+
+  createBookElement(CreateBookElementDto: CreateBookElementDto) {
+    const { bookId } = CreateBookElementDto;
+
+    const item = new BookElement();
+    item.bookId = bookId;
 
     item.save();
 
